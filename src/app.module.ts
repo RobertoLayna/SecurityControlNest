@@ -7,15 +7,20 @@ import { GroupsModule } from './groups/groups.module';
 import { ResidencesModule } from './residences/residences.module';
 import { VisitsModule } from './visits/visits.module';
 import { ResidentialsModule } from './residentials/residentials.module';
+import { SpecialVisitsModule } from './special-visits/special-visits.module';
+import { LogsModule } from './logs/logs.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      /* host: 'localhost',
       username: 'sa',
-      password: '123456',
-      database: 'security_backend',
+      password: '123456', */
+      host: '70.35.207.67',
+      username: 'security_api',
+      password: 'Security#666',
+      database: 'security_control',
       entities: [],
       migrations: ['dist/migrations/*{.ts,.js}'],
       cli: { migrationsDir: 'migrations' },
@@ -28,6 +33,8 @@ import { ResidentialsModule } from './residentials/residentials.module';
     ResidencesModule,
     VisitsModule,
     ResidentialsModule,
+    SpecialVisitsModule,
+    LogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

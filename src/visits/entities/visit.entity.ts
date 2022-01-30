@@ -21,13 +21,13 @@ export class Visit {
   @Column('date')
   visit_start_date: Date;
 
-  @Column('date')
+  @Column({ type: 'date', nullable: true })
   visit_end_date: Date;
 
-  @Column('time')
+  @Column({ type: 'time', nullable: true })
   visit_start_time: Date;
 
-  @Column('time')
+  @Column({ type: 'time', nullable: true })
   visit_end_time: Date;
 
   @Column()

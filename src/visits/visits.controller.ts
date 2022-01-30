@@ -1,34 +1,61 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { VisitsService } from './visits.service';
-import { CreateVisitDto } from './dto/create-visit.dto';
-import { UpdateVisitDto } from './dto/update-visit.dto';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { VisitsService as Service } from './visits.service';
+import { CreateVisitDto as CreateDto } from './dto/create-visit.dto';
+import { UpdateVisitDto as UpdateDto } from './dto/update-visit.dto';
 
 @Controller('visits')
 export class VisitsController {
-  constructor(private readonly visitsService: VisitsService) {}
+  constructor(private readonly service: Service) {}
 
   @Post()
-  create(@Body() createVisitDto: CreateVisitDto) {
-    return this.visitsService.create(createVisitDto);
+  async create(@Body() createDto: CreateDto) {
+    const register = await this.service.create(createDto);
+    const Data = await this.service.findOne(register.visit_id);
+
+    return { Data };
   }
 
   @Get()
-  findAll() {
-    return this.visitsService.findAll();
+  async findAll() {
+    const Data = (await this.service.findAll()) || [];
+
+    return { Data };
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.visitsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const Data = (await this.service.findOne(+id)) || null;
+
+    return { Data };
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVisitDto: UpdateVisitDto) {
-    return this.visitsService.update(+id, updateVisitDto);
+  @Get('qr/:code')
+  async findBy(@Param('code') code: string) {
+    const Data = await this.service.find({
+      where: { visit_identifier: code },
+    });
+
+    return { Data };
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateDto: UpdateDto) {
+    const register = await this.service.update(+id, updateDto);
+    const Data = await this.service.findOne(register.visit_id);
+
+    return { Data };
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.visitsService.remove(+id);
+    return this.service.remove(+id);
   }
 }

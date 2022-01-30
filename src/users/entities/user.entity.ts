@@ -17,6 +17,7 @@ export class User {
 
   @Column()
   user_residence_id: number;
+
   @Column()
   user_complete_name: string;
 

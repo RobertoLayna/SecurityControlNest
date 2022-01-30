@@ -7,18 +7,18 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { UsersService as Service } from './users.service';
-import { CreateUserDto as CreateDto } from './dto/create-user.dto';
-import { UpdateUserDto as UpdateDto } from './dto/update-user.dto';
+import { SpecialVisitsService as Service } from './special-visits.service';
+import { CreateSpecialVisitDto as CreateDto } from './dto/create-special-visit.dto';
+import { UpdateSpecialVisitDto as UpdateDto } from './dto/update-special-visit.dto';
 
-@Controller('users')
-export class UsersController {
+@Controller('special-visits')
+export class SpecialVisitsController {
   constructor(private readonly service: Service) {}
 
   @Post()
   async create(@Body() createResidenceDto: CreateDto) {
     const register = await this.service.create(createResidenceDto);
-    const Data = await this.service.findOne(register.user_id);
+    const Data = await this.service.findOne(register.special_visit_id);
 
     return { Data };
   }
@@ -40,7 +40,7 @@ export class UsersController {
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateResidenceDto: UpdateDto) {
     const register = await this.service.update(+id, updateResidenceDto);
-    const Data = await this.service.findOne(register.user_id);
+    const Data = await this.service.findOne(register.special_visit_id);
 
     return { Data };
   }
