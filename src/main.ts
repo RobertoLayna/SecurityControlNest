@@ -15,6 +15,7 @@ export const createNestServer = async (expressInstance: express.Express) => {
     adapter,
     {},
   );
+  app.listen(8085);
   app.enableCors();
 
   app.useGlobalPipes(
@@ -28,6 +29,6 @@ export const createNestServer = async (expressInstance: express.Express) => {
   return app.init();
 };
 createNestServer(server)
-  .then((v) => console.log('Nest Ready'))
+  .then((v) => console.log('Nest Ready port '))
   .catch((err) => console.error('Nest broken', err));
 export const api: functions.HttpsFunction = functions.https.onRequest(server);
