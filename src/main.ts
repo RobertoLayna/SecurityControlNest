@@ -15,7 +15,7 @@ export const createNestServer = async (expressInstance: express.Express) => {
     adapter,
     {},
   );
-  app.listen(8085);
+  app.listen(3000);
   app.enableCors();
 
   app.useGlobalPipes(
