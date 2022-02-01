@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, IsBoolean } from 'class-validator';
 
 export class CreateResidenceDto {
   @IsNotEmpty()
@@ -6,10 +6,14 @@ export class CreateResidenceDto {
   residence_residential_id: number;
 
   @IsNotEmpty()
-  @IsInt()
-  residence_number: number;
+  @IsString()
+  residence_number: string;
 
   @IsNotEmpty()
   @IsString()
   residence_address: string;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  residence_active: boolean;
 }

@@ -1,9 +1,14 @@
+import { IsOptional } from 'class-validator';
 import { IsBoolean, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
   @IsInt()
   user_residence_id: number;
+
+  @IsOptional()
+  @IsInt()
+  user_residential_id: number | null;
 
   @IsNotEmpty()
   @IsString()

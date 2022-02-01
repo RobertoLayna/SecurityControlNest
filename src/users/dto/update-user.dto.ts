@@ -3,6 +3,7 @@ import {
   IsInt,
   IsNotEmpty,
   IsString,
+  IsOptional,
   ValidateIf,
 } from 'class-validator';
 
@@ -13,6 +14,13 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsInt()
   user_residence_id: number;
+
+  @ValidateIf(
+    (o) => Object.keys(o).length == 0 || o.hasOwnProperty('user_residential_id'),
+  )
+  @IsOptional()
+  @IsInt()
+  user_residential_id: number | null;
 
   @ValidateIf(
     (o) => Object.keys(o).length == 0 || o.hasOwnProperty('user_complete_name'),

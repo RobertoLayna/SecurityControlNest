@@ -1,4 +1,4 @@
-import { ValidateIf, IsNotEmpty, IsString, IsInt } from 'class-validator';
+import { ValidateIf, IsNotEmpty, IsString, IsInt, IsBoolean } from 'class-validator';
 
 export class UpdateResidenceDto {
   @ValidateIf(
@@ -14,8 +14,8 @@ export class UpdateResidenceDto {
     (o) => Object.keys(o).length == 0 || o.hasOwnProperty('residence_number'),
   )
   @IsNotEmpty()
-  @IsInt()
-  residence_number: number;
+  @IsString()
+  residence_number: string;
 
   @ValidateIf(
     (o) => Object.keys(o).length == 0 || o.hasOwnProperty('residence_address'),
@@ -23,4 +23,11 @@ export class UpdateResidenceDto {
   @IsNotEmpty()
   @IsString()
   residence_address: string;
+
+  @ValidateIf(
+    (o) => Object.keys(o).length == 0 || o.hasOwnProperty('user_active'),
+  )
+  @IsNotEmpty()
+  @IsBoolean()
+  residence_active: boolean;
 }

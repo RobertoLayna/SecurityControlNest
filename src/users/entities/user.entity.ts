@@ -18,6 +18,9 @@ export class User {
   @Column()
   user_residence_id: number;
 
+  @Column({ type: 'int', nullable: true })
+  user_residential_id: number;
+
   @Column()
   user_complete_name: string;
 

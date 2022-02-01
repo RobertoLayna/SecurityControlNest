@@ -20,10 +20,13 @@ export class Residence {
   residence_residential_id: number;
 
   @Column()
-  residence_number: number;
+  residence_number: string;
 
   @Column()
   residence_address: string;
+
+  @Column()
+  residence_active: boolean;
 
   @CreateDateColumn({ select: false, type: 'timestamp' })
   created_at: Date;
