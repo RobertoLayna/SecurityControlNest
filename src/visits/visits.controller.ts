@@ -46,6 +46,15 @@ export class VisitsController {
     return { Data };
   }
 
+  @Get('user/:id')
+  async findBy(@Param('id') id: number) {
+    const Data = await this.service.find({
+      where: { visit_user_id: id },
+    });
+
+    return { Data };
+  }
+
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateDto: UpdateDto) {
     const register = await this.service.update(+id, updateDto);
